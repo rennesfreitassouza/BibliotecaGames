@@ -1,0 +1,22 @@
+<form class="needs-validation" novalidate [formGroup]="this.form" style="padding-top: 10px"><!--Como obter valores NAME e PUBLISHER DE GAMES? Como em: https://youtu.be/laPM0vojRSA?t=736 [formGroup]="this.form"> resulta em erro-->
+<!--     <div> -->
+    <div class="col-md-4">
+        <label for="NAME" class="form-label">Nome do Game</label>
+        <input type="text" class="form-control" id="NAME" placeholder="Nome do Game" formControlName="NAME" />
+        <!-- <div class="invalid-feedback" *ngIf="hasError('NAME') && hasError('NAME')['required']" >
+            Por favor informe um nome para o curso.
+        </div> -->
+    </div>
+
+    <div class="col-md-4">
+        <label for="PUBLISHER" class="form-label">Editora do Game</label>
+        <input type="text" class="form-control" id="PUBLISHER" placeholder="Publisher (editora) do Game" formControlName="PUBLISHER" />
+    </div>
+<!-- </div> -->
+    <div class="col-md-4" style="margin-top: 10px">
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+        <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+    </div>
+
+</form>
+  
