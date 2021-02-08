@@ -33,13 +33,6 @@ export class GamesListaComponent implements OnInit {
       },
       error => console.error(error),
       () => console.log('completed request')
-
-      // success => {
-      //   console.log('Success!');
-      //   //this.location.reload();
-      // },
-      // error => console.error(error),
-      // () => console.log('completed request')
     );
   }
 }

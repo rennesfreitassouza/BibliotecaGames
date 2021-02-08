@@ -10,7 +10,7 @@ export class ReleasesService {
 
   private readonly APISELECT = 'http://localhost:3000/select/?opcaoSelect=RELEASES&daTabelaEmQue=';
   private readonly APIINSERT = 'http://localhost:3000/insert/';
-
+  private readonly APIDELETE = 'http://localhost:3000/delete/?opcaoDelete=RELEASES';
   constructor(private http: HttpClient) { }
 
   list() {
@@ -25,6 +25,11 @@ export class ReleasesService {
                            ".." + releases.PLATAFORM + 
                            ".." + "DATA" +
                            ".." + releases.VERSION, null).pipe(take(1));
+  }
+
+  remove(releases: Releases) {
+    console.log("Remove: "+releases.GAME + " " + releases.PLATAFORM + " " + releases.RELEASEDATE + " " + releases.VERSION);
+    return this.http.delete(this.APIDELETE + "&game="+ releases.GAME+ "&plataform=" + releases.PLATAFORM +"&version=" + releases.VERSION).pipe(take(1));
   }
 
 }

@@ -17,4 +17,15 @@ export class PlatafomrsListaComponent implements OnInit {
     this.service.list().subscribe(dados => this.plataforms = dados);
   }
 
+  onDelete(plataforms : Plataforms){
+    console.log(plataforms.NAME);
+    this.service.remove(plataforms).subscribe(
+      success=> {
+        this.service.list().subscribe(dados => this.plataforms = dados);
+      },
+      error => console.error(error),
+      () => console.log('completed request')
+    );
+  }
+
 }

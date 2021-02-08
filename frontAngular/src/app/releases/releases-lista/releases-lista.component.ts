@@ -18,4 +18,15 @@ export class ReleasesListaComponent implements OnInit {
     
   }
 
+  onDelete(releases : Releases){
+    console.log(releases.GAME + " " + releases.PLATAFORM + " " + releases.RELEASEDATE + " " + releases.VERSION);
+    this.service.remove(releases).subscribe(
+      success=> {
+        this.service.list().subscribe(dados => this.releases = dados);
+      },
+      error => console.error(error),
+      () => console.log('completed request')
+    );
+  }
+
 }
