@@ -24,13 +24,14 @@ export class GamesFormComponent implements OnInit {
 
     this.form = this.fb.group({
       NAME: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(255)]], //- `input (NAME, PUBLISHER);`
-      PUBLISHER: [null, Validators.required, Validators.minLength(1), Validators.maxLength(255)]
+      PUBLISHER: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(255)]]
     });
   }
 
   onSubmit(){
     this.submitted = true;
     console.log(this.form.value);
+    console.log(this.form.valid);
     if (this.form.valid){
       console.log('submit');
     }
@@ -39,6 +40,7 @@ export class GamesFormComponent implements OnInit {
   onCancel(){
     this.submitted = false;
     this.form.reset();
+    console.log(this.form.reset());
   }
 
 }
