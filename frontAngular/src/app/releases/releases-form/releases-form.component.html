@@ -1,0 +1,28 @@
+<form class="needs-validation" novalidate [formGroup]="form" style="padding-top: 10px">
+
+    <div class="col-md-4">
+        <label for="GAME" class="form-label">Nome do Game</label>
+        <input type="text" class="form-control" id="GAME" placeholder="Nome do Game" formControlName="GAME" />
+    </div>
+
+    <div class="col-md-4">
+        <label for="PLATAFORM" class="form-label">Nome da Plataforma</label>
+        <input type="text" class="form-control" id="PLATAFORM" placeholder="Nome da Plataforma" formControlName="PLATAFORM" />
+    </div>
+
+    <div class="col-md-4">
+        <label for="RELEASEDATE" class="form-label">Data do lançamento</label>
+        <input type="text" class="form-control" id="RELEASEDATE" placeholder="Data do lançamento" formControlName="RELEASEDATE" />
+    </div>
+
+    <div class="col-md-4">
+        <label for="VERSION" class="form-label">Versão do lançamento</label>
+        <input type="text" class="form-control" id="VERSION" placeholder="Versão do lançamento" formControlName="VERSION" />
+    </div>
+
+    <div class="col-md-4" style="margin-top: 10px">
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+        <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+    </div>
+
+</form>

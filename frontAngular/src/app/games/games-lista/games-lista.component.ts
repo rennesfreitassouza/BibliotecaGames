@@ -1,8 +1,8 @@
-
 import { GamesService } from './../games.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Games } from './../games';
 
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -13,13 +13,33 @@ import { Games } from './../games';
 export class GamesListaComponent implements OnInit {
 
   games: Games[] = [{GAMES_ID: 0, NAME: "", PUBLISHER: "",}];
+  /* deleteModalRef: BsModalRef = this.modalService.show("");
+ */
+  //@ViewChild('deleteModal', {static: true}) deleteModal: string = "";
 
-  constructor(private service: GamesService) { }
+  constructor(private service: GamesService, private location: Location) { }/* private modalService: BsModalService ) { }*/
+  
 
   ngOnInit(): void {
-    //@Crossori
     this.service.list().subscribe(dados => this.games = dados);
-    //console.log(this.games);
+    
   }
 
+  onDelete(games : Games){
+    console.log(games.NAME);
+    this.service.remove(games).subscribe(
+      success=> {
+        this.service.list().subscribe(dados => this.games = dados);
+      },
+      error => console.error(error),
+      () => console.log('completed request')
+
+      // success => {
+      //   console.log('Success!');
+      //   //this.location.reload();
+      // },
+      // error => console.error(error),
+      // () => console.log('completed request')
+    );
+  }
 }

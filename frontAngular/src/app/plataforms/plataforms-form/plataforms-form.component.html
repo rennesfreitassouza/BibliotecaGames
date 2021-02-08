@@ -1,0 +1,13 @@
+<form class="needs-validation" novalidate [formGroup]="this.form" style="padding-top: 10px">
+
+    <div class="col-md-4">
+        <label for="NAME" class="form-label">Nome da Plataforma</label>
+        <input type="text" class="form-control" id="NAME" placeholder="Nome da Plataforma" formControlName="NAME" />
+    </div>
+
+    <div class="col-md-4" style="margin-top: 10px">
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+        <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+    </div>
+
+</form>

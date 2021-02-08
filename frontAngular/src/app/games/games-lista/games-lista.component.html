@@ -27,7 +27,7 @@
             
             <td>
               <span class="float-right">
-                <button class="btn btn-outline-danger mb-1 btn-sm" ><!--(click)="onDelete(curso)">-->
+                <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(game)">
                   Remover
                 </button>
               </span>
@@ -53,7 +53,7 @@
   
   <ng-template #deleteModal>
     <div class="modal-body text-center">
-      <p>Tem certeza que deseja remover esse curso?</p>
+      <p>Tem certeza que deseja remover esse Game?</p>
       <button type="button" class="btn btn-default">Sim</button> <!-- (click)="onConfirmDelete()">Sim</button>-->
       <button type="button" class="btn btn-primary">Não</button> <!-- (click)="onDeclineDelete()">Nao</button> -->
     </div>
