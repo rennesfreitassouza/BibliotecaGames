@@ -24,6 +24,46 @@ class HttpGet extends Component {
       this.strNAME = "";
       this.objetoGAMENAME = {GAMES_ID: 0, NAME: "", PUBLISHER: ""};
     }
+
+    render() {
+      const nome = this.state.NAME;
+      return (
+        <>
+          <StatusBar barStyle="dark-content" />
+          <SafeAreaView>
+            <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
+              <View>
+                {this.renderTabelaGames(this.arrayJ)}
+
+              </View>
+                
+              <View style={StyleSheet.container}>
+                <View style={styles.entradas}>
+                  <TextInput 
+                    style={styles.input} 
+                    placeholder="Insira texto aqui para busca por nome do Game" 
+                    keyboardType={"default"} 
+                    onSubmitEditing={
+                      ({nativeEvent}) => {
+                        this.setstrNAME({nativeEvent});
+                        this.httpGAMEGetRequest(this.strNAME);
+                      }
+                    }
+                    multiline={false} 
+
+                  />
+                </View>
+                  <Text style={ {fontSize: 22} }>{"Games encontrados:"}</Text>
+                  <Text style={ {fontSize: 20} }>{"ID:" +this.state.GAMES_ID}</Text>
+                  <Text style={ {fontSize: 18} }>{"Nome:" +nome}</Text>
+                  <Text style={ {fontSize: 16 } }>{"Editora:"+ this.state.PUBLISHER}</Text>
+              </View>
+                      
+            </ScrollView>
+          </SafeAreaView>
+        </>
+      )
+    }
     
     componentDidMount = () => {
       fetch('http://10.0.2.2:3000/select/?opcaoSelect=GAMES&daTabelaEmQue=', {
@@ -82,45 +122,6 @@ class HttpGet extends Component {
       this.objetoGAMENAME = objetoGAMENAME;
     }
 
-    render() {
-      const nome = this.state.NAME;
-      return (
-        <>
-          <StatusBar barStyle="dark-content" />
-          <SafeAreaView>
-            <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
-              <View>
-                {this.renderTabelaGames(this.arrayJ)}
-
-              </View>
-                
-              <View style={StyleSheet.container}>
-                <View style={styles.entradas}>
-                  <TextInput 
-                    style={styles.input} 
-                    placeholder="Insira texto aqui para busca por nome do Game" 
-                    keyboardType={"default"} 
-                    onSubmitEditing={
-                      ({nativeEvent}) => {
-                        this.setstrNAME({nativeEvent});
-                        this.httpGAMEGetRequest(this.strNAME);
-                      }
-                    }
-                    multiline={false} 
-                  />
-                </View>
-                  <Text style={ {fontSize: 22} }>{"Games encontrados:"}</Text>
-                  <Text style={ {fontSize: 20} }>{"ID:" +this.state.GAMES_ID}</Text>
-                  <Text style={ {fontSize: 18} }>{"Nome:" +nome}</Text>
-                  <Text style={ {fontSize: 16 } }>{"Editora:"+ this.state.PUBLISHER}</Text>
-              </View>
-                      
-            </ScrollView>
-          </SafeAreaView>
-        </>
-      )
-    }
-
     addArrayJ(elem)
     {
       console.log("push method addArrayJ: "+elem.NAME);
@@ -140,16 +141,10 @@ class HttpGet extends Component {
         );
       });
     }
-
-    logs(log)
-    {
-      console.log(log);
-    }  
 }
-
+ 
   
-  
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     scrollView: {
       backgroundColor: Colors.lighter,
     },
@@ -161,25 +156,23 @@ class HttpGet extends Component {
       flexDirection: 'row',
     },
     input: {
-          textAlign: "center",
-          alignSelf: 'center',
-          padding: 30,
-          fontSize: 15,
-          
+      textAlign: 'center',
+      alignSelf: 'center',
+      padding: 30,
+      fontSize: 15,
     },
     button: {
-      alignItems: "center",
-      backgroundColor: "#DDDDDD",
-      padding: 10
+      alignItems: 'center',
+      backgroundColor: '#DDDDDD',
+      padding: 10,
     },
-    buttonText:{
+    buttonText: {
       alignSelf: 'center',
       padding: 30,
       fontSize: 20,
       color: 'lightgray',
       fontWeight: 'bold',
-    }
-  
-  });
+    },
+});
 
 export default HttpGet;
