@@ -29,11 +29,11 @@ function AppTab(){
                     inactiveBackgroundColor: '#fafafc',
                     activeBackgroundColor: '#ebebf5',
                     inactiveTintColor: '#c1bccc',
-                    activeTintColor: '#32264d'
+                    activeTintColor: 'black'
                 }}
             >
                 <Screen name="HttpGet [Listagem]" component={HttpGet} />
-                <Screen name="AppCriacao " component={AppCriacao} />
+                <Screen name="AppCriacao [Inserção]" component={AppCriacao} />
             </Navigator>
         </NavigationContainer>
     )

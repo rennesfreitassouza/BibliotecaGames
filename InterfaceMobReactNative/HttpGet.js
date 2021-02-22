@@ -14,6 +14,8 @@ import {
     Colors,
   } from 'react-native/Libraries/NewAppScreen';
 
+import styles from './styles';
+
 
 class HttpGet extends Component {
 
@@ -22,7 +24,7 @@ class HttpGet extends Component {
       this.state = {GAMES_ID: 0, NAME: "null", PUBLISHER: "null"};
       this.arrayJ = [];
       this.strNAME = "";
-      this.objetoGAMENAME = {GAMES_ID: 0, NAME: "", PUBLISHER: ""};
+      this.arrayBuscaPorGAMENAME = [];
     }
 
     render() {
@@ -52,11 +54,9 @@ class HttpGet extends Component {
                     multiline={false} 
 
                   />
+                  
                 </View>
-                  <Text style={ {fontSize: 22} }>{"Games encontrados:"}</Text>
-                  <Text style={ {fontSize: 20} }>{"ID:" +this.state.GAMES_ID}</Text>
-                  <Text style={ {fontSize: 18} }>{"Nome:" +nome}</Text>
-                  <Text style={ {fontSize: 16 } }>{"Editora:"+ this.state.PUBLISHER}</Text>
+                {this.renderTabelaGames(this.arrayBuscaPorGAMENAME)}
               </View>
                       
             </ScrollView>
@@ -64,11 +64,18 @@ class HttpGet extends Component {
         </>
       )
     }
+
+    componentDidUpdate(prevProps, prevState) {
+      if (prevState !== this.state) {
+        console.log('state state has changed.')
+      }
+    }
+    
     
     componentDidMount = () => {
       fetch('http://10.0.2.2:3000/select/?opcaoSelect=GAMES&daTabelaEmQue=', {
         method: 'GET',
-        mode: 'same-origin',
+        mode: 'cors',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
@@ -92,7 +99,7 @@ class HttpGet extends Component {
       console.log("Parametro entrada httpGAMEGetRequest: "+valorName);
       fetch('http://10.0.2.2:3000/select/?opcaoSelect=GAMES&daTabelaEmQue='+valorName, {
         method: 'GET',
-        mode: 'same-origin',
+        mode: 'cors',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
@@ -104,9 +111,9 @@ class HttpGet extends Component {
         this.arrayJ = []; //Após a primeira renderização, a array com todos os valores retornados recebe um array vazio para nada ser renderizado novamente.
         for (let responseJ in responseJson){ //Valor UNIQUE para NAME, evitar FOR loop (ou pensar "valor vazio lista tudo")
           console.log("GAME DO LAÇO FOR: "+responseJson[responseJ].NAME);
-          this.setobjetoGAMENAME(responseJson[responseJ]);
+          this.addObjetosBusca(responseJson[responseJ]);
         }
-        this.setState(this.objetoGAMENAME);
+        this.setState(this.arrayBuscaPorGAMENAME);  
       })
       .catch((error) => {
         console.error(error);
@@ -118,8 +125,8 @@ class HttpGet extends Component {
       console.log(this.strNAME);
     }
 
-    setobjetoGAMENAME(objetoGAMENAME){
-      this.objetoGAMENAME = objetoGAMENAME;
+    addObjetosBusca(arrayBuscaPorGAMENAME){
+      this.arrayBuscaPorGAMENAME.push(arrayBuscaPorGAMENAME);
     }
 
     addArrayJ(elem)
@@ -128,12 +135,15 @@ class HttpGet extends Component {
       this.arrayJ.push(elem);
     }
 
-    renderTabelaGames(array) {      
+    renderTabelaGames(array) {
+      
+
       return array.map((objeto, index) => {
         const key = index;
+        this.arrayBuscaPorGAMENAME = [];
         return (
           <View>
-            <Text key={key}>Dados recuperados da tabela Games:</Text>
+            <Text key={key+4}>Dados recuperados da tabela Games:</Text>
             <Text key={key+1}>ID: {objeto.GAMES_ID}</Text>
             <Text key={key+2}>Nome: {objeto.NAME}</Text>
             <Text key={key+3}>Editora: {objeto.PUBLISHER}</Text>
@@ -142,37 +152,7 @@ class HttpGet extends Component {
       });
     }
 }
- 
   
-const styles = StyleSheet.create({
-    scrollView: {
-      backgroundColor: Colors.lighter,
-    },
-    container: {
-      flex: 1,
-      backgroundColor: 'black',
-    },
-    entradas: {
-      flexDirection: 'row',
-    },
-    input: {
-      textAlign: 'center',
-      alignSelf: 'center',
-      padding: 30,
-      fontSize: 15,
-    },
-    button: {
-      alignItems: 'center',
-      backgroundColor: '#DDDDDD',
-      padding: 10,
-    },
-    buttonText: {
-      alignSelf: 'center',
-      padding: 30,
-      fontSize: 20,
-      color: 'lightgray',
-      fontWeight: 'bold',
-    },
-});
+
 
 export default HttpGet;
