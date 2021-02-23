@@ -25,4 +25,4 @@ DELETE url options:
 - http://localhost:3000/delete/?opcaoDelete=PLATAFORMS&PLATAFORMSplataforms_IdOrName=testeInputPlat
 
 - TABELA RELEASES:
-- http://localhost:3000/delete/?opcaoDelete=REeLEASES&game=4&plataform=25&version=12
+- http://localhost:3000/delete/?opcaoDelete=RELEASES&game=4&plataform=25&version=12

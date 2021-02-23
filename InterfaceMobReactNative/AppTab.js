@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
  
 import HttpGet from './HttpGet';
 import AppCriacao from './AppCriacao';
+import AppDelecao from './AppDelecao';
 
 const {Navigator, Screen} = createBottomTabNavigator();
 
@@ -32,8 +33,9 @@ function AppTab(){
                     activeTintColor: 'black'
                 }}
             >
-                <Screen name="HttpGet [Listagem]" component={HttpGet} />
-                <Screen name="AppCriacao [Inserção]" component={AppCriacao} />
+                <Screen name="[Listagem]" component={HttpGet} />
+                <Screen name="[Inserção]" component={AppCriacao} />
+                <Screen name="[Deleção]" component={AppDelecao} />
             </Navigator>
         </NavigationContainer>
     )

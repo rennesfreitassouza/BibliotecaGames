@@ -11,60 +11,13 @@ const port = 3000;
 
 const dbConfig = require('./dbconfig.js');
 
-/*
-router.param('opcaoListagem', async function  (req, res, next, opcaoSelect) {
-    let connection; //Declaração de variável de escopo de bloco.
 
-    connection = await oracledb.getConnection(dbConfig);
-    
-    let sql; //let declaração de variável de escopo de bloco.
-    let binds, options, result;
-    let todasTabelas = ["RELEASES", "PLATAFORMS", "GAMES"];
-    let indexTabelas = 0;
-    let opcao1Tabela = opcaoSelect;
-
-
-    
-    if (opcao1Tabela === 'todas') {
-        indexTabelas = 2;
-        opcao1Tabela = todasTabelas[indexTabelas];
-    }
-    while (indexTabelas >= 0) {
-        sql = `SELECT * FROM (${opcao1Tabela})`;
-
-        binds = {};
-
-        options = {
-            outFormat: oracledb.OUT_FORMAT_OBJECT //query result format
-        };
-
-        result = await connection.execute(sql, binds, options);
-        res.json(result); //falta msg de erro
-        //res.sendStatus(200).json(result);
-        //res.send(JSON.stringify(result));
-        
-
-        indexTabelas--;
-        if (indexTabelas > -1)
-            opcao1Tabela = todasTabelas[indexTabelas];
-    }
-    next();
-});
-
-
-router.get('/select/:opcaoListagem', function (req, res) {
-    let teste = req.query.opcaoSelect;
-    console.log('HTTP GET REQUEST '+ req.query.opcaoSelect +' On: ', Date.now());
-    
-});
-
-*/
 router.get('/select/', async (req, res) => {
-    let connection; //Declaração de variável de escopo de bloco.
+    let connection; 
 
     connection = await oracledb.getConnection(dbConfig);
     
-    let sql; //let declaração de variável de escopo de bloco.
+    let sql; 
     let binds, options, result;
     let todasTabelas = ["RELEASES", "PLATAFORMS", "GAMES"];
     let indexTabelas = 0;
@@ -102,13 +55,13 @@ router.get('/select/', async (req, res) => {
 
     let finalResult = [];
     while (indexTabelas > -1) {
-        //valor para sql já atribuído.
+        
         console.log("sql = "+sql);
 
         binds = {};
 
         options = {
-            //outFormat: oracledb.OUT_FORMAT_OBJECT //query format result 
+            
             outFormat: oracledb.OBJECT
         };
 
@@ -154,7 +107,7 @@ router.post(/^\/insert\/(\w+)(?:\.\.(\w+))?(?:\.\.(\w+))?(?:\.\.(\w+))?$/, async
         }
     }
 
-    let connection; //Declaração de variável de escopo de bloco.
+    let connection; 
     connection = await oracledb.getConnection(dbConfig);
 
     console.log('HTTP POST REQUEST: ' + inputs + ' inputs');
@@ -206,7 +159,6 @@ router.post(/^\/insert\/(\w+)(?:\.\.(\w+))?(?:\.\.(\w+))?(?:\.\.(\w+))?$/, async
             
             break;
         case 4:
-            // FORMATO ACEITO input: 10, 45, DATA, 11
             nomeTabela = "RENNESFREITAS.RELEASES"
             sql = `INSERT INTO ${nomeTabela} (GAME, PLATAFORM, VERSION) VALUES (:1, :2, :3)`;
             binds = [
@@ -232,18 +184,17 @@ router.post(/^\/insert\/(\w+)(?:\.\.(\w+))?(?:\.\.(\w+))?(?:\.\.(\w+))?$/, async
 
 router.delete('/delete/', async (req, res) => {
     console.log('HTTP DELETE REQUEST  On: ', Date.now());
-    let connection; //Declaração de variável de escopo de bloco.
+    let connection; 
 
     connection = await oracledb.getConnection(dbConfig);
 
-    let sql; //let declaração de variável de escopo de bloco.
+    let sql; 
     let binds, options, result;
     let todasTabelas = ["RELEASES", "PLATAFORMS", "GAMES"];
     let indexTabelas = 0;
     let opcao4Tabela = req.query.opcaoDelete;
-    //0 falso, 1 verdadeiro
     switch (opcao4Tabela) {
-        case 'GAMES': //verificar dependências
+        case 'GAMES': //verificar dependências para deleção
 
             let GAMESgame_IdOrName = req.query.GAMESgame_IdOrName;
 
@@ -271,7 +222,7 @@ router.delete('/delete/', async (req, res) => {
             res.json(result);
 
             break;
-        case 'PLATAFORMS': //verificar dependências
+        case 'PLATAFORMS': //verificar dependências para deleção
             let PLATAFORMSplataforms_IdOrName = req.query.PLATAFORMSplataforms_IdOrName
 
             let testeTipoletPLATAFORMS = parseInt(PLATAFORMSplataforms_IdOrName);
