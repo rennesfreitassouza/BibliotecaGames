@@ -1,5 +1,5 @@
 const oracledb = require('oracledb');
-const readlineSync = require('readline-sync');
+
 const express = require('express');
 const app = express();
 const router = express.Router()

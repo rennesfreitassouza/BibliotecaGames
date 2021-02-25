@@ -1,5 +1,5 @@
 const oracledb = require('oracledb');
-const readlineSync = require('readline-sync');
+
 const express = require('express');
 
 const cors = require('cors'); 
@@ -288,4 +288,3 @@ app.use(router);
 app.listen(port, () => {
     console.log(`API listening at http://localhost:${port}`)
 })
-
