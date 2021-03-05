@@ -1,0 +1,16 @@
+{
+  "name": "expresss",
+  "version": "0.0.1",
+  "description": "Node.js http server",
+  "main": "main.js",
+  "scripts": {
+    "start": "node expresss.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "author": "rennes",
+  "license": "ISC",
+  "devDependencies": {}
+}

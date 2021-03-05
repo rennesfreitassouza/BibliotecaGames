@@ -1,0 +1,18 @@
+{
+  "name": "restapi",
+  "version": "0.0.1",
+  "description": "Node.js on Docker",
+  "author": "First Last <first.last@example.com>",
+  "main": "API_withCORS.js",
+  "scripts": {
+    "start": "node API_withCORS.js"
+  },
+  "dependencies": {
+    "oracledb": "latest",
+    "express": "4.17.1",
+    "cors": "2.8.5"
+  },
+  "devDependencies": {},
+  "license": "ISC",
+  "keywords": []
+}
